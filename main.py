@@ -50,7 +50,7 @@ if __name__ == '__main__':
             'name': 'Clothing', 'createdAt': datetime.datetime(2020, 6, 16, 22, 45, 44, 626000), '__v': 0}
             """
             if 'assets' in collection_names:
-                category_assets = db['assets'].find({}, {"_id": category['image']})
+                category_assets = db['assets'].find({"_id": category['image']}, {"_id": 1, "url": 1, "type": 1})
                 for c_asset in category_assets:
                     print(c_asset)
     else:

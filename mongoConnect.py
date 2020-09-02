@@ -18,12 +18,3 @@ def mongo_connect(url):
     except Exception as e:
         print(e)
         return None
-
-
-def mongo_get_db(client, dbname):
-    db = client[dbname]
-    return db
-
-
-def mongo_get_schemas(db):
-    return None

@@ -16,7 +16,7 @@ if __name__ == '__main__':
 
     # check if productcategories collection in db
     if 'productcategories' in collection_names:
-        categories = db['productcategories']
+        categories = db['productcategories'].find()
         for category in categories:
             print(category)
             exit(0)

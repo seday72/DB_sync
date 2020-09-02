@@ -10,3 +10,15 @@ def woocommerce_connect():
         version="wc/v3"
     )
     return wcapi
+
+
+def get_categories(wcapi):
+    try:
+        result = wcapi.get('products/categories')
+        if result.status_code == 200:
+            return result.json()
+        else:
+            return None
+    except:
+        return None
+

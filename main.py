@@ -35,7 +35,7 @@ if __name__ == '__main__':
             'path': 'product-categories/industrial-real-estate.jpg', 'type': 'IMAGE', 'size': 1000, 
             'mimetype': 'image/jpeg', 'createdAt': datetime.datetime(2020, 6, 16, 22, 46, 35, 424000), '__v': 0}
             """
-            assets.append({'id': asset['_id'], 'url': asset['url'], 'type': asset['type']})
+            asset_urls.append({'id': asset['_id'], 'url': asset['url'], 'type': asset['type']})
     else:
         print_sep()
         print('assets not exist ')

@@ -1,13 +1,8 @@
 from mongoConnect import *
 from woocommerceConnect import *
 from pprint import pprint
+from setting import *
 
 if __name__ == '__main__':
-    woo_api = woocommerce_connect()
-    try:
-        woo_products = woo_api.get('products')
-        if woo_products.status_code == 200:
-            pprint(woo_products.json())
-    except:
-        print('Error')
-    # mongo_connect()
+    client = mongo_connect(mongoDB_url_test)
+    db = mongo_get_db(client, 'aaa')

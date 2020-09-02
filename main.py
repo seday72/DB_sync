@@ -23,22 +23,7 @@ if __name__ == '__main__':
 
     # get collections
     collection_names = db.list_collection_names()
-    # check if assets collection exist in db
-    asset_urls = []
-    if 'assets' in collection_names:
-        assets = db['assets'].find().limit(5)
-        for asset in assets:
-            """
-            assets sample: 
-            {'_id': '2384f8c5-f800-438c-b925-f7f5f7ae7bd3', 'status': 'UPLOADED', 'owner': 'system', 
-            'url': 'https://cdn-stage.shoclef.com/product-categories/industrial-real-estate.jpg', 
-            'path': 'product-categories/industrial-real-estate.jpg', 'type': 'IMAGE', 'size': 1000, 
-            'mimetype': 'image/jpeg', 'createdAt': datetime.datetime(2020, 6, 16, 22, 46, 35, 424000), '__v': 0}
-            """
-            asset_urls.append({'id': asset['_id'], 'url': asset['url'], 'type': asset['type']})
-    else:
-        print_sep()
-        print('assets not exist ')
+
     # check if productcategories collection exist in db
     if 'productcategories' in collection_names:
         categories = db['productcategories'].find().limit(3)
@@ -50,9 +35,8 @@ if __name__ == '__main__':
             'name': 'Clothing', 'createdAt': datetime.datetime(2020, 6, 16, 22, 45, 44, 626000), '__v': 0}
             """
             if 'assets' in collection_names:
-                category_assets = db['assets'].find({"_id": category['image']}, {"_id": 1, "url": 1, "type": 1})
-                for c_asset in category_assets:
-                    print(c_asset)
+                category_asset = db['assets'].find_one({"_id": category['image']}, {"_id": 1, "url": 1, "type": 1})
+                print(category_asset)
     else:
         print_sep()
         print('productcategories not exist')

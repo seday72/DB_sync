@@ -14,6 +14,10 @@ if __name__ == '__main__':
     # get collections
     collection_names = db.list_collection_names()
 
-    # loop collections
-    print(collection_names)
+    # check if productcategories collection in db
+    if 'productcategories' in collection_names:
+        categories = db['productcategories']
+        for category in categories:
+            print(category)
+            exit(0)
 

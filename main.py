@@ -3,10 +3,20 @@ from woocommerceConnect import *
 from pprint import pprint
 from setting import *
 
+
+def print_sep():
+    print('------------------------------------------')
+
+
 if __name__ == '__main__':
 
     # connect to test client
     client = mongo_connect(mongoDB_url_test)
+
+    if client is None:
+        print_sep()
+        print('connect to mongo client failed')
+        exit(0)
 
     # connect test db
     db = client[mongoDB_test_dbname]
@@ -18,11 +28,32 @@ if __name__ == '__main__':
     if 'assets' in collection_names:
         assets = db['assets'].find().limit(5)
         for asset in assets:
-            print(asset)
+            """
+            assets sample: 
+            {'_id': '2384f8c5-f800-438c-b925-f7f5f7ae7bd3', 'status': 'UPLOADED', 'owner': 'system', 
+            'url': 'https://cdn-stage.shoclef.com/product-categories/industrial-real-estate.jpg', 
+            'path': 'product-categories/industrial-real-estate.jpg', 'type': 'IMAGE', 'size': 1000, 
+            'mimetype': 'image/jpeg', 'createdAt': datetime.datetime(2020, 6, 16, 22, 46, 35, 424000), '__v': 0}
+            """
+            assets.append({'id': asset['_id'], 'url': asset['url'], 'type': asset['type']})
+    else:
+        print_sep()
+        print('assets not exist ')
     # check if productcategories collection exist in db
     if 'productcategories' in collection_names:
-        categories = db['productcategories'].find()
+        categories = db['productcategories'].find().limit(3)
         for category in categories:
-            print(category)
-            exit(0)
-
+            """
+            product sample:
+            {'_id': '40dcea32-8946-411b-9ebb-6c609602c579', 'parent': None, 'parents': [], 'hasChildren': True, 
+            'image': 'acf34aa9-1ca6-4808-990d-ec539d6eaeea', 'level': 1, 'liveStreamCategory': None, 'order': 1, 
+            'name': 'Clothing', 'createdAt': datetime.datetime(2020, 6, 16, 22, 45, 44, 626000), '__v': 0}
+            """
+            if 'assets' in collection_names:
+                category_asset = db['assets'].find({}, {"_id": category['image']})
+                if category_asset:
+                    print(category_asset)
+    else:
+        print_sep()
+        print('productcategories not exist')
+        exit(0)

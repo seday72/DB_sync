@@ -50,9 +50,9 @@ if __name__ == '__main__':
             'name': 'Clothing', 'createdAt': datetime.datetime(2020, 6, 16, 22, 45, 44, 626000), '__v': 0}
             """
             if 'assets' in collection_names:
-                category_asset = db['assets'].find({}, {"_id": category['image']})
-                if category_asset:
-                    print(category_asset)
+                category_assets = db['assets'].find({}, {"_id": category['image']})
+                for c_asset in category_assets:
+                    print(c_asset)
     else:
         print_sep()
         print('productcategories not exist')

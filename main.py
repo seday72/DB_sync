@@ -13,8 +13,13 @@ if __name__ == '__main__':
 
     # get collections
     collection_names = db.list_collection_names()
-
-    # check if productcategories collection in db
+    # check if assets collection exist in db
+    asset_urls = []
+    if 'assets' in collection_names:
+        assets = db['assets'].find().limit(5)
+        for asset in assets:
+            print(asset)
+    # check if productcategories collection exist in db
     if 'productcategories' in collection_names:
         categories = db['productcategories'].find()
         for category in categories:

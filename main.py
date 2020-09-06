@@ -17,7 +17,7 @@ if __name__ == '__main__':
     # pprint(woo_categories)
 
     # connect to test client
-    client = mongo_connect(mongoDB_test_dbname)
+    client = mongo_connect(mongoDB_url_test)
     if client is None:
         print_sep()
         print('connect to mongo client failed')

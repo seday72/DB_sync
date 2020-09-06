@@ -34,6 +34,6 @@ def woocommerce_add_category(wcapi, data):
             print(r.json())
             return 0
     except Exception as e:
-        print('error {}'.format(e))
+        print('error {}, {}'.format(e, data))
         return 0
 

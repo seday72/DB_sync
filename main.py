@@ -36,6 +36,7 @@ if __name__ == '__main__':
     if 'productcategories' in collection_names:
         categories = db['productcategories'].find().sort('level')
         for category in categories:
+            print_sep()
             """
             product sample:
             {'_id': '40dcea32-8946-411b-9ebb-6c609602c579', 'parent': None, 'parents': [], 'hasChildren': True, 

@@ -31,7 +31,9 @@ def woocommerce_add_category(wcapi, data):
         elif r.status_code == 400:
             return r.json()['data']['resource_id']
         else:
+            print(r.json())
             return 0
-    except:
+    except Exception as e:
+        print(e)
         return 0
 

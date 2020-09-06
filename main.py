@@ -67,6 +67,7 @@ if __name__ == '__main__':
                         cat_data['parent'] = p_category['woo_id']
                         break
                 m_category['woo_id'] = woocommerce_add_category(woo_api, cat_data)
+                print('category in woocommerce: {}'.format(m_category['woo_id']))
             mongo_categories.append(m_category)
         pprint(mongo_categories)
     else:

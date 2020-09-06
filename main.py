@@ -12,23 +12,25 @@ if __name__ == '__main__':
     # connect to woocommerce api
     woo_api = woocommerce_connect()
 
-    #get woocommerce categories
+    # get woocommerce categories
     woo_categories = get_categories(woo_api)
-    print(woo_categories)
+    # pprint(woo_categories)
 
     # connect to test client
-    client = mongo_connect(mongoDB_url_test)
+    client = mongo_connect(mongoDB_test_dbname)
     if client is None:
         print_sep()
         print('connect to mongo client failed')
         exit(0)
 
+    print_sep()
+    print('MongoDB Connection Success')
+
     # connect test db
-    db = client[mongoDB_test_dbname]
+    db = client.mongoDB_test_dbname
 
     # get collections
     collection_names = db.list_collection_names()
-
     # check if productcategories collection exist in db
     if 'productcategories' in collection_names:
         categories = db['productcategories'].find().limit(3)
@@ -43,7 +45,7 @@ if __name__ == '__main__':
             category_asset = None
             if 'assets' in collection_names:
                 category_asset = db['assets'].find_one({"_id": category['image']}, {"_id": 1, "url": 1, "type": 1})
-
+            pprint(category)
     else:
         print_sep()
         print('productcategories not exist')

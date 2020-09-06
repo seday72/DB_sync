@@ -3,14 +3,17 @@ from pymongo import MongoClient, errors
 from pprint import pprint
 
 
-def mongo_connect(url):
+def mongo_connect(url=None):
     """
     Connect to mongo atlas
     :return: mongo client
     """
     try:
         # connect to MongoDB, change the << MONGODB URL >> to reflect your own connection string
-        client = MongoClient(url)
+        if url is None:
+            client = MongoClient()
+        else:
+            client = MongoClient(url)
         return client
     except errors.ServerSelectionTimeoutError as err:
         print(err)

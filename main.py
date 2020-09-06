@@ -34,7 +34,7 @@ if __name__ == '__main__':
     # check if productcategories collection exist in db
     mongo_categories = []
     if 'productcategories' in collection_names:
-        categories = db['productcategories'].find().sort({'level': 1})
+        categories = db['productcategories'].find().sort({'level': 1, 'order': 1})
         for category in categories:
             """
             product sample:

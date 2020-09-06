@@ -22,3 +22,16 @@ def get_categories(wcapi):
     except:
         return None
 
+
+def woocommerce_add_category(wcapi, data):
+    try:
+        r = wcapi.post('products/categories', data)
+        if r.status_code == 201:
+            return r.json()['id']
+        elif r.status_code == 400:
+            return r.json()['data']['resource_id']
+        else:
+            return 0
+    except:
+        return 0
+

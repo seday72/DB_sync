@@ -32,6 +32,7 @@ if __name__ == '__main__':
     # get collections
     collection_names = db.list_collection_names()
     # check if productcategories collection exist in db
+    mongo_categories = []
     if 'productcategories' in collection_names:
         categories = db['productcategories'].find().limit(3)
         for category in categories:
@@ -42,10 +43,19 @@ if __name__ == '__main__':
             'name': 'Clothing', 'createdAt': datetime.datetime(2020, 6, 16, 22, 45, 44, 626000), '__v': 0}
             """
             print('category %s' % category['name'])
-            category_asset = None
+            m_category = {'id': category['_id'], 'level': 1, 'liveStreamCategory': None, 'order': 1, 'name': 'Clothing',
+                          'asset': None}
+            cat_data = {
+                'name': category['text'],
+            }
             if 'assets' in collection_names:
                 category_asset = db['assets'].find_one({"_id": category['image']}, {"_id": 1, "url": 1, "type": 1})
-            pprint(category)
+                m_category['asset'] = category_asset
+                cat_data['image'] = {'src': category_asset['url']}
+            if category['level'] == 1:
+                m_category['woo_id'] = woocommerce_add_category(woo_api, cat_data)
+
+            pprint(m_category)
     else:
         print_sep()
         print('productcategories not exist')

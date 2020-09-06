@@ -30,7 +30,7 @@ def woocommerce_add_category(wcapi, data):
             return r.json()['id']
         elif r.status_code == 400:
             if r.json()['code'] == 'woocommerce_rest_invalid_remote_image_url':
-                return -1 # remote image url invalid error
+                return -1  # remote image url invalid error
             return r.json()['data']['resource_id']
         else:
             print(r.json())
@@ -38,4 +38,3 @@ def woocommerce_add_category(wcapi, data):
     except Exception as e:
         print('error {}, {}'.format(e, data))
         return 0
-

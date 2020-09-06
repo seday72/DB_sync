@@ -56,8 +56,9 @@ if __name__ == '__main__':
             }
             if 'assets' in collection_names:
                 category_asset = db['assets'].find_one({"_id": category['image']}, {"_id": 1, "url": 1, "type": 1})
-                m_category['asset'] = category_asset
-                cat_data['image'] = {'src': category_asset['url']}
+                if category_asset['url']:
+                    m_category['asset'] = category_asset
+                    cat_data['image'] = {'src': category_asset['url']}
             if category['level'] == 1:
                 m_category['woo_id'] = woocommerce_add_category(woo_api, cat_data)
             else:

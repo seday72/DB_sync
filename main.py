@@ -60,15 +60,23 @@ if __name__ == '__main__':
                     # print('category image url: {}'.format(category_asset['url']))
                     m_category['asset'] = category_asset
                     cat_data['image'] = {'src': category_asset['url']}
-            if category['level'] == 1:
-                m_category['woo_id'] = woocommerce_add_category(woo_api, cat_data)
-            else:
+            if category['level'] != 1:
                 for p_category in mongo_categories:
                     if p_category['id'] == category['parent']:
                         cat_data['parent'] = p_category['woo_id']
                         break
-                m_category['woo_id'] = woocommerce_add_category(woo_api, cat_data)
-            print('category in woocommerce: {}'.format(m_category['woo_id']))
+            woo_id = woocommerce_add_category(woo_api, cat_data)
+            if woo_id == -1:
+                cat_data_without_image = {'name': category['name']}
+                if 'parent' in cat_data:
+                    cat_data_without_image['parent'] = cat_data['parent']
+                woo_id = woocommerce_add_category(woo_api, cat_data_without_image)
+            if woo_id == 0:
+                print('insert category to woocommerce failed!')
+                continue
+            m_category['woo_id'] = woo_id
+
+            print('category in woocommerce: {}'.format(woo_id))
             mongo_categories.append(m_category)
         pprint(mongo_categories)
     else:

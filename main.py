@@ -43,7 +43,7 @@ if __name__ == '__main__':
             'image': 'acf34aa9-1ca6-4808-990d-ec539d6eaeea', 'level': 1, 'liveStreamCategory': None, 'order': 1, 
             'name': 'Clothing', 'createdAt': datetime.datetime(2020, 6, 16, 22, 45, 44, 626000), '__v': 0}
             """
-            print('category in mongo: %s' % category['name'])
+            print('category in mongo: {}, {}'.format(category['name'], category['level']))
             m_category = {
                 'id': category['_id'],
                 'level': category['level'],

@@ -46,7 +46,7 @@ if __name__ == '__main__':
             m_category = {'id': category['_id'], 'level': 1, 'liveStreamCategory': None, 'order': 1, 'name': 'Clothing',
                           'asset': None}
             cat_data = {
-                'name': category['text'],
+                'name': category['name'],
             }
             if 'assets' in collection_names:
                 category_asset = db['assets'].find_one({"_id": category['image']}, {"_id": 1, "url": 1, "type": 1})

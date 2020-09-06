@@ -47,8 +47,6 @@ if __name__ == '__main__':
             m_category = {
                 'id': category['_id'],
                 'level': category['level'],
-                'liveStreamCategory': category['liveStreamCategory'],
-                'order': category['order'],
                 'name': category['name'],
                 'asset': None
             }

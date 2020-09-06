@@ -34,7 +34,7 @@ if __name__ == '__main__':
     # check if productcategories collection exist in db
     mongo_categories = []
     if 'productcategories' in collection_names:
-        categories = db['productcategories'].find().sort({'level': 1, 'order': 1})
+        categories = db['productcategories'].find().sort('level')
         for category in categories:
             """
             product sample:
@@ -43,8 +43,14 @@ if __name__ == '__main__':
             'name': 'Clothing', 'createdAt': datetime.datetime(2020, 6, 16, 22, 45, 44, 626000), '__v': 0}
             """
             print('category in mongo: %s' % category['name'])
-            m_category = {'id': category['_id'], 'level': 1, 'liveStreamCategory': None, 'order': 1, 'name': 'Clothing',
-                          'asset': None}
+            m_category = {
+                'id': category['_id'],
+                'level': category['level'],
+                'liveStreamCategory': category['liveStreamCategory'],
+                'order': category['order'],
+                'name': category['name'],
+                'asset': None
+            }
             cat_data = {
                 'name': category['name'],
             }

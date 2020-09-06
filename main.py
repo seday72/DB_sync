@@ -27,7 +27,7 @@ if __name__ == '__main__':
     print('MongoDB Connection Success')
 
     # connect test db
-    db = client.mongoDB_test_dbname
+    db = client[mongoDB_test_dbname]
 
     # get collections
     collection_names = db.list_collection_names()

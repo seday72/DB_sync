@@ -66,7 +66,7 @@ def woocommerce_product_add(wcapi, product, update=False):
         elif r.status_code == 400:
             pid = r.json()['data']['resource_id']
             if update:
-                pid = woocommerce_product_update(pid, product)
+                pid = woocommerce_product_update(wcapi, pid, product)
             return pid
     except:
         traceback.print_exc()

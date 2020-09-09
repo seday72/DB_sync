@@ -3,6 +3,9 @@ from woocommerceConnect import *
 from pprint import pprint
 from setting import *
 from currency_converter import CurrencyConverter
+from PIL import Image
+from io import BytesIO
+import requests
 
 
 def print_sep():
@@ -122,7 +125,10 @@ if __name__ == '__main__':
                 if product and 'assets' in product:
                     for p_asset in product['assets']:
                         asset = db['assets'].find_one({"_id": p_asset}, {"_id": 1, "url": 1, "type": 1})
-                        product_assets.append({'src': asset['url']})
+                        response = requests.get(asset['url'])
+                        # print(response.status_code)
+                        if response.status_code == 200:
+                            product_assets.append({'src': asset['url']})
                 if product_assets:
                     product_data['images'] = product_assets
                 mongo_brand = db['brands'].find_one({'_id': product['brand']})

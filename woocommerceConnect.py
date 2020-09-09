@@ -9,7 +9,7 @@ def woocommerce_connect():
         consumer_key=woocommerce_ck,
         consumer_secret=woocommerce_cs,
         version="wc/v3",
-        timeout=100
+        timeout=300
     )
     return wcapi
 

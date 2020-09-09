@@ -8,7 +8,8 @@ def woocommerce_connect():
         url=woocommerce_url,
         consumer_key=woocommerce_ck,
         consumer_secret=woocommerce_cs,
-        version="wc/v3"
+        version="wc/v3",
+        timeout=100
     )
     return wcapi
 

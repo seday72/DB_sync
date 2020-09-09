@@ -91,6 +91,7 @@ if __name__ == '__main__':
                     'type': 'simple',
                     'price': "%s" % product['oldPrice'],
                     'regular_price': "%s" % product['price'],
+                    'currency': product['currency'],
                     'description': product['description'],
                     'short_description': product['description'],
                     'categories': [{'id': woo_id}],

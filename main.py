@@ -17,7 +17,7 @@ if __name__ == '__main__':
     # pprint(woo_categories)
 
     # connect to test client
-    client = mongo_connect(mongoDB_url_local)
+    client = mongo_connect(mongoDB_url_prod)
     # client = mongo_connect(mongoDB_url_test)
     if client is None:
         print_sep()
@@ -28,7 +28,7 @@ if __name__ == '__main__':
     print('MongoDB Connection Success')
 
     # connect test db
-    db = client[mongoDB_local_dbname]
+    db = client[mongoDB_prod_dbname]
     # db = client[mongoDB_test_dbname]
 
     # get collections

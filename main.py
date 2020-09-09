@@ -3,8 +3,6 @@ from woocommerceConnect import *
 from pprint import pprint
 from setting import *
 from currency_converter import CurrencyConverter
-from PIL import Image
-from io import BytesIO
 import requests
 
 

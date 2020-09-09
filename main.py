@@ -95,16 +95,28 @@ if __name__ == '__main__':
 
             # loop category products
             for product in mongo_products:
-                product_data = {
-                    'name': product['title'],
-                    'type': 'simple',
-                    'price': "%s" % cc.convert(product['oldPrice'], product['currency'], 'USD'),
-                    'regular_price': "%s" % cc.convert(product['price'], product['currency'], 'USD'),
-                    'description': product['description'],
-                    'short_description': product['description'],
-                    'categories': [{'id': woo_id}],
-                    'sku': product['_id']
-                }
+                try:
+                    product_data = {
+                        'name': product['title'],
+                        'type': 'simple',
+                        'price': "%s" % cc.convert(float(product['oldPrice']), product['currency'], 'USD'),
+                        'regular_price': "%s" % cc.convert(float(product['price']), product['currency'], 'USD'),
+                        'description': product['description'],
+                        'short_description': product['description'],
+                        'categories': [{'id': woo_id}],
+                        'sku': product['_id']
+                    }
+                except:
+                    product_data = {
+                        'name': product['title'],
+                        'type': 'simple',
+                        'price': "%s" % product['oldPrice'],
+                        'regular_price': "%s" % product['price'],
+                        'description': product['description'],
+                        'short_description': product['description'],
+                        'categories': [{'id': woo_id}],
+                        'sku': product['_id']
+                    }
                 # get product images
                 product_assets = []
                 if product and 'assets' in product:

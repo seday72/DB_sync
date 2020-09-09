@@ -95,7 +95,7 @@ if __name__ == '__main__':
                     'description': product['description'],
                     'short_description': product['description'],
                     'categories': [{'id': woo_id}],
-                    'sku': product['_id']
+                    # 'sku': product['_id']
                 }
                 # get product images
                 product_assets = []

@@ -2,6 +2,7 @@ from mongoConnect import *
 from woocommerceConnect import *
 from pprint import pprint
 from setting import *
+from currency_converter import CurrencyConverter
 
 
 def print_sep():
@@ -9,6 +10,12 @@ def print_sep():
 
 
 if __name__ == '__main__':
+    cc = None
+    try:
+        cc = CurrencyConverter()
+    except:
+        print('currency convert not working')
+        exit(0)
     # connect to woocommerce api
     woo_api = woocommerce_connect()
 
@@ -91,13 +98,12 @@ if __name__ == '__main__':
                 product_data = {
                     'name': product['title'],
                     'type': 'simple',
-                    'price': "%s" % product['oldPrice'],
-                    'regular_price': "%s" % product['price'],
-                    'currency': product['currency'],
+                    'price': "%s" % cc.convert(product['oldPrice'], product['currency'], 'USD'),
+                    'regular_price': "%s" % cc.convert(product['price'], product['currency'], 'USD'),
                     'description': product['description'],
                     'short_description': product['description'],
                     'categories': [{'id': woo_id}],
-                    # 'sku': product['_id']
+                    'sku': product['_id']
                 }
                 # get product images
                 product_assets = []

@@ -93,7 +93,8 @@ if __name__ == '__main__':
                     'regular_price': "%s" % product['price'],
                     'description': product['description'],
                     'short_description': product['description'],
-                    'categories': [{'id': woo_id}]
+                    'categories': [{'id': woo_id}],
+                    'sku': product['_id']
                 }
                 # get product images
                 product_assets = []

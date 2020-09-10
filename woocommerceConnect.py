@@ -78,7 +78,6 @@ def woocommerce_product_add(wcapi, product, update=False):
 def woocommerce_product_update(wcapi, pid, product):
     try:
         r = wcapi.get('products/%d' % pid)
-        print(r.json())
         if 'images' in r.json():
             for image_attr in r.json()['images']:
                 if 'id' in image_attr:
@@ -86,6 +85,7 @@ def woocommerce_product_update(wcapi, pid, product):
                     break
 
         r = wcapi.put('products/%d' % pid, product)
+        print(r.json())
         if r.status_code == 200:
             return pid  # update success
         else:

@@ -141,7 +141,7 @@ if __name__ == '__main__':
                         product_data['tags'] = []
                         product_data['tags'].append({'id': tag_id})
 
-                product_id = woocommerce_product_add(woo_api, product_data, False)
+                product_id = woocommerce_product_add(woo_api, product_data, True)
 
                 print_sep()
                 print("insert product {}". format(product_id))

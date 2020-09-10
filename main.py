@@ -125,8 +125,8 @@ if __name__ == '__main__':
                         asset = db['assets'].find_one({"_id": p_asset}, {"_id": 1, "url": 1, "type": 1})
                         response = requests.get(asset['url'])
                         # print(response.status_code)
-                        if response.status_code == 200:
-                            product_assets.append({'src': asset['url']})
+                        # if response.status_code == 200:
+                        product_assets.append({'src': asset['url']})
                 if product_assets:
                     product_data['images'] = product_assets
                 mongo_brand = db['brands'].find_one({'_id': product['brand']})

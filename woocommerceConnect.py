@@ -60,11 +60,11 @@ def woocommerce_product_add(wcapi, product, update=False):
         r = wcapi.post('products', product)
 
         print(r.json())
+
         if r.status_code == 201:
             ret = r.json()['id']
             return ret
         elif r.status_code == 400:
-            print(r.json())
             pid = r.json()['data']['resource_id']
             if update:
                 pid = woocommerce_product_update(wcapi, pid, product)

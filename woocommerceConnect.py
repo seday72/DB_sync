@@ -89,6 +89,7 @@ def woocommerce_product_update(wcapi, pid, product):
         if r.status_code == 200:
             return pid  # update success
         else:
+            exit(0)
             return -1  # update failed
     except:
         traceback.print_exc()
